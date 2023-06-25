@@ -48,6 +48,9 @@ func handleTCPConnection(conn net.Conn, messageHandler string) {
 	case "SIA-CID":
 		h := handlers.SIACIDHandler{}
 		h.Handle(message)
+	case "CSV-IP":
+		h := handlers.CSVIPHandler{}
+		h.Handle(message)
 	default:
 		log.Println("Invalid message handler specified:", messageHandler)
 	}
