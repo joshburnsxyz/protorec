@@ -2,8 +2,6 @@ package handlers
 
 import (
 	"fmt"
-	"strconv"
-	"strings"
 )
 
 // SIACIDHandler is a handler for SIA-CID messages
