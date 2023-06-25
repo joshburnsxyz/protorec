@@ -5,6 +5,8 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"os"
+	"io/ioutil"
 )
 
 // Config struct represents the structure of the JSON config file
