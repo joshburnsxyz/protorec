@@ -4,9 +4,11 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
+	"io"
+	"io/ioutil"
 	"log"
 	"os"
-	"io/ioutil"
+
 	"github.com/joshburnsxyz/protorec/servers"
 )
 
@@ -16,6 +18,7 @@ type Config struct {
 	Host           string `json:"host"`
 	Port           int    `json:"port"`
 	MessageHandler string `json:"message_handler"`
+	LogFilePath    string `json:"logfile"`
 }
 
 func main() {
@@ -43,14 +46,27 @@ func main() {
 		log.Fatal("Error reading config file:", err)
 	}
 
+	// Create the log file
+	logFile, err := os.Create(configData.LogFilePath)
+	if err != nil {
+		log.Fatal("Error creating log file:", err)
+	}
+	defer logFile.Close()
+
+	// Create a multi-writer for logging to both stdout and the log file
+	logOutput := io.MultiWriter(os.Stdout, logFile)
+
+	// Set the logger output to the multi-writer
+	log.SetOutput(logOutput)
+
 	// Boot server based on config
 	switch configData.Protocol {
 	case "tcp":
-		fmt.Println("Booting TCP server...")
+		log.Println("Booting TCP server...")
 		// Implement your TCP server logic here using the host, port, and message handler
 		servers.StartTCPServer(configData.Host, configData.Port, configData.MessageHandler)
 	case "udp":
-		fmt.Println("Booting UDP server...")
+		log.Println("Booting UDP server...")
 		// Implement your UDP server logic here using the host, port, and message handler
 		servers.StartUDPServer(configData.Host, configData.Port, configData.MessageHandler)
 	default:

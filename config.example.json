@@ -2,5 +2,6 @@
   "protocol": "tcp",
   "host": "127.0.0.1",
   "port": 8080,
-  "message_handler": "SIA-CID"
+  "message_handler": "SIA-CID",
+  "logfile": "./test.log"
 }
