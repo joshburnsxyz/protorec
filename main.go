@@ -5,8 +5,6 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"net"
-	"os"
 )
 
 // Config struct represents the structure of the JSON config file
