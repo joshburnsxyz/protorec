@@ -25,8 +25,8 @@ func StartUDPServer(host string, port int, messageHandler string) {
 	}
 	defer conn.Close()
 
-	fmt.Printf("UDP server listening on %s:%d\n", host, port)
-	fmt.Printf("Using %s parser\n", messageHandler)
+	log.Printf("UDP server listening on %s:%d\n", host, port)
+	log.Printf("Using %s parser\n", messageHandler)
 
 	for {
 		buf := make([]byte, 1024)

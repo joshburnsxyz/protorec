@@ -18,8 +18,8 @@ func StartTCPServer(host string, port int, messageHandler string) {
 	}
 	defer listener.Close()
 
-	fmt.Printf("TCP server listening on %s:%d\n", host, port)
-	fmt.Printf("Using %s parser\n", messageHandler)
+	log.Printf("TCP server listening on %s:%d\n", host, port)
+	log.Printf("Using %s parser\n", messageHandler)
 
 	for {
 		conn, err := listener.Accept()
