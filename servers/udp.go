@@ -26,6 +26,7 @@ func StartUDPServer(host string, port int, messageHandler string) {
 	defer conn.Close()
 
 	fmt.Printf("UDP server listening on %s:%d\n", host, port)
+	fmt.Printf("Using %s parser\n", messageHandler)
 
 	for {
 		buf := make([]byte, 1024)
@@ -43,7 +44,8 @@ func StartUDPServer(host string, port int, messageHandler string) {
 func handleUDPMessage(message string, addr *net.UDPAddr, messageHandler string) {
 	switch messageHandler {
 	case "SIA-CID":
-		handlers.SIACIDHandler.Handle(message)
+		h := handlers.SIACIDHandler{}
+		h.Handle(message)
 		// Example: Call the SIACIDHandler to handle the UDP message
 	default:
 		log.Println("Invalid message handler specified:", messageHandler)

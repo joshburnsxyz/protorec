@@ -19,6 +19,7 @@ func StartTCPServer(host string, port int, messageHandler string) {
 	defer listener.Close()
 
 	fmt.Printf("TCP server listening on %s:%d\n", host, port)
+	fmt.Printf("Using %s parser\n", messageHandler)
 
 	for {
 		conn, err := listener.Accept()
@@ -45,7 +46,8 @@ func handleTCPConnection(conn net.Conn, messageHandler string) {
 
 	switch messageHandler {
 	case "SIA-CID":
-		handlers.SIACIDHandler.Handle(message)
+		h := handlers.SIACIDHandler{}
+		h.Handle(message)
 	default:
 		log.Println("Invalid message handler specified:", messageHandler)
 	}
