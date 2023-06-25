@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"io/ioutil"
+	"github.com/joshburnsxyz/protorec/servers"
 )
 
 // Config struct represents the structure of the JSON config file
@@ -47,11 +48,11 @@ func main() {
 	case "tcp":
 		fmt.Println("Booting TCP server...")
 		// Implement your TCP server logic here using the host, port, and message handler
-		// Example: StartTCPServer(configData.Host, configData.Port, configData.MessageHandler)
+		servers.StartTCPServer(configData.Host, configData.Port, configData.MessageHandler)
 	case "udp":
 		fmt.Println("Booting UDP server...")
 		// Implement your UDP server logic here using the host, port, and message handler
-		// Example: StartUDPServer(configData.Host, configData.Port, configData.MessageHandler)
+		servers.StartUDPServer(configData.Host, configData.Port, configData.MessageHandler)
 	default:
 		log.Fatal("Invalid protocol specified in the config file")
 	}
