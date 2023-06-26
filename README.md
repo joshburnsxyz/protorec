@@ -1,6 +1,6 @@
 # Protorec
 
-Protorec is a configurable endpoint for testing alarm devices, it currently handles "SIA-CID" and "CSV-IP" messages over both UDP and TCP. The server is configured using a JSON file.
+Protorec is a configurable endpoint for testing alarm devices, it currently handles "SIA-CID", "CSV-IP", and "MQTT"  messages over both UDP and TCP. The server is configured using a JSON file.
 
 ## Usage
 
