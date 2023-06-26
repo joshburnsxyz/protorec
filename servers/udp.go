@@ -38,17 +38,21 @@ func StartUDPServer(host string, port int, messageHandler string) {
 }
 
 func handleUDPMessage(message string, addr *net.UDPAddr, messageHandler string) {
+	var handlerOutput
+
 	switch messageHandler {
 	case "SIA-CID":
 		h := handlers.SIACIDHandler{}
-		h.Handle(message)
+		handlerOutput = h.Handle(message)
 	case "CSV-IP":
 		h := handlers.CSVIPHandler{}
-		h.Handle(message)
+		handlerOutput = h.Handle(message)
 	case "MQTT":
 		h := handlers.MQTTHandler{}
-		h.Handle(message)
+		handlerOutput = h.Handle(message)
 	default:
-		log.Println("Invalid message handler specified:", messageHandler)
+		log.Fatal("Invalid message handler specified:", messageHandler)
 	}
+
+	log.Println(handlerOutput)
 }
