@@ -46,6 +46,11 @@ func main() {
 		log.Fatal("Error reading config file:", err)
 	}
 
+	// Validate the config data and apply defaults if necessary
+	if err := ValidateConfigData(&configData); err != nil {
+		log.Fatal("Invalid config data:", err)
+	}
+
 	// Create the log file
 	logFile, err := os.Create(configData.LogFilePath)
 	if err != nil {
@@ -86,4 +91,29 @@ func ReadConfigFile(configFile string) (Config, error) {
 		return configData, err
 	}
 	return configData, nil
+}
+
+// ValidateConfigData validates the config data and applies defaults if necessary
+func ValidateConfigData(configData *Config) error {
+	if configData.Protocol == "" {
+		configData.Protocol = "tcp"
+	}
+
+	if configData.Host == "" {
+		configData.Host = "0.0.0.0"
+	}
+
+	if configData.Port == 0 {
+		configData.Port = 55011
+	}
+
+	if configData.MessageHandler == "" {
+		return fmt.Errorf("message_handler is required")
+	}
+
+	if configData.LogFilePath == "" {
+		configData.LogFilePath = "server.log"
+	}
+
+	return nil
 }
