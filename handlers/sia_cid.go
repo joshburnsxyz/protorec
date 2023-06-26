@@ -2,18 +2,12 @@ package handlers
 
 import (
 	"fmt"
-	"log"
 )
 
 // SIACIDHandler is a handler for SIA-CID messages
 type SIACIDHandler struct{}
 
-func (h SIACIDHandler) Handle(message string) {
-	result := h.parseSIACIDMessage(message)
-	log.Println(result)
-}
-
-func (h SIACIDHandler) parseSIACIDMessage(message string) string {
+func (h SIACIDHandler) Handle(message string) string {
 	// Define the field lengths and positions in the SIA-CID message
 	const (
 		accountNumberLength = 3

@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"testing"
+	"log"
 )
 
 func TestSIACIDHandler_Handle(t *testing.T) {
@@ -12,5 +13,6 @@ func TestSIACIDHandler_Handle(t *testing.T) {
 	message := "0010030051234567890123456789A"
 
 	// Call the Handle method
-	handler.Handle(message)
+	output := handler.Handle(message)
+	log.Println(output)
 }

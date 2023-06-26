@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"testing"
+	"log"
 )
 
 func TestMQTTHandler_Handle(t *testing.T) {
@@ -10,5 +11,6 @@ func TestMQTTHandler_Handle(t *testing.T) {
 	// Test case 1: Valid MQTT message
 	validMessage := "\x08topic123payload"
 
-	handler.Handle(validMessage)
+	output := handler.Handle(validMessage)
+	log.Println(output)
 }

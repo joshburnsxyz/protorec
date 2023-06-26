@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"testing"
+	"log"
 )
 
 func TestCSVIPHandler_Handle(t *testing.T) {
@@ -12,5 +13,6 @@ func TestCSVIPHandler_Handle(t *testing.T) {
 	message := "127.0.0.1,8080,data1,data2,data3"
 
 	// Call the Handle method
-	handler.Handle(message)
+	output := handler.Handle(message)
+	log.Println(output)
 }
