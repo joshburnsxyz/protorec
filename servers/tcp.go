@@ -47,7 +47,7 @@ func handleTCPConnection(conn net.Conn, messageHandler string) {
 	case "CSV-IP":
 		h := handlers.CSVIPHandler{}
 		h.Handle(message)
-	case: "MQTT":
+	case "MQTT":
 		h := handlers.MQTTHandler{}
 		h.Handle(message)
 	default:
