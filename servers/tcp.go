@@ -40,7 +40,7 @@ func handleTCPConnection(conn net.Conn, messageHandler string) {
 
 	message := string(buf[:n])
 
-	var handlerOutput
+	var handlerOutput string
 
 	switch messageHandler {
 	case "SIA-CID":

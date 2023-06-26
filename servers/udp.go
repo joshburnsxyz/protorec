@@ -38,7 +38,7 @@ func StartUDPServer(host string, port int, messageHandler string) {
 }
 
 func handleUDPMessage(message string, addr *net.UDPAddr, messageHandler string) {
-	var handlerOutput
+	var handlerOutput string
 
 	switch messageHandler {
 	case "SIA-CID":
