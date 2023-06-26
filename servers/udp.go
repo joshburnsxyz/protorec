@@ -9,10 +9,6 @@ import (
 )
 
 func StartUDPServer(host string, port int, messageHandler string) {
-	// Start UDP server logic here
-	// Use the 'host', 'port', and 'messageHandler' parameters as needed
-	// Example code below demonstrates a simple UDP server that listens for incoming messages
-
 	addr := fmt.Sprintf("%s:%d", host, port)
 	udpAddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {

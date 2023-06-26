@@ -8,10 +8,6 @@ import (
 )
 
 func StartTCPServer(host string, port int, messageHandler string) {
-	// Start TCP server logic here
-	// Use the 'host', 'port', and 'messageHandler' parameters as needed
-	// Example code below demonstrates a simple TCP server that accepts connections and logs received messages
-
 	listener, err := net.Listen("tcp", fmt.Sprintf("%s:%d", host, port))
 	if err != nil {
 		log.Fatal("Error starting TCP server:", err)
