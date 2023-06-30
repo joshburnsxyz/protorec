@@ -7,7 +7,7 @@ import (
 	"net"
 )
 
-func StartTCPServer(host string, port int, messageHandler string) {
+func StartTCPServer(host string, port int, messageHandler string, messageBufferLen int) {
 	listener, err := net.Listen("tcp", fmt.Sprintf("%s:%d", host, port))
 	if err != nil {
 		log.Fatal("Error starting TCP server:", err)
@@ -24,14 +24,14 @@ func StartTCPServer(host string, port int, messageHandler string) {
 			continue
 		}
 
-		go handleTCPConnection(conn, messageHandler)
+		go handleTCPConnection(conn, messageHandler, messageBufferLen)
 	}
 }
 
-func handleTCPConnection(conn net.Conn, messageHandler string) {
+func handleTCPConnection(conn net.Conn, messageHandler string, messageBufferLen int) {
 	defer conn.Close()
 
-	buf := make([]byte, 1024)
+	buf := make([]byte, messageBufferLen)
 	n, err := conn.Read(buf)
 	if err != nil {
 		log.Println("Error reading message:", err)
