@@ -14,11 +14,12 @@ import (
 
 // Config struct represents the structure of the JSON config file
 type Config struct {
-	Protocol       string `json:"protocol"`
-	Host           string `json:"host"`
-	Port           int    `json:"port"`
-	MessageHandler string `json:"message_handler"`
-	LogFilePath    string `json:"logfile"`
+	Protocol       	    string `json:"protocol"`
+	Host           	    string `json:"host"`
+	Port                int    `json:"port"`
+	MessageHandler 	    string `json:"message_handler"`
+	LogFilePath    	    string `json:"logfile"`
+	MessageBufferLength int    `json:"message_buffer_length"`
 }
 
 func main() {
@@ -113,6 +114,10 @@ func ValidateConfigData(configData *Config) error {
 
 	if configData.LogFilePath == "" {
 		configData.LogFilePath = "server.log"
+	}
+
+	if configData.MessageBufferLength = 0 {
+		configData.MessageBufferLength = 1024
 	}
 
 	return nil
