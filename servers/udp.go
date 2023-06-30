@@ -8,7 +8,7 @@ import (
 	"github.com/joshburnsxyz/protorec/handlers"
 )
 
-func StartUDPServer(host string, port int, messageHandler string) {
+func StartUDPServer(host string, port int, messageHandler string, messageBufferLen int) {
 	addr := fmt.Sprintf("%s:%d", host, port)
 	udpAddr, err := net.ResolveUDPAddr("udp", addr)
 	if err != nil {
@@ -33,11 +33,11 @@ func StartUDPServer(host string, port int, messageHandler string) {
 		}
 
 		message := string(buf[:n])
-		go handleUDPMessage(message, addr, messageHandler)
+		go handleUDPMessage(message, addr, messageHandler, messageBufferLen)
 	}
 }
 
-func handleUDPMessage(message string, addr *net.UDPAddr, messageHandler string) {
+func handleUDPMessage(message string, addr *net.UDPAddr, messageHandler string, messageBufferLen int) {
 	var handlerOutput string
 
 	switch messageHandler {
