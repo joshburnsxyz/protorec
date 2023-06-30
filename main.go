@@ -70,11 +70,11 @@ func main() {
 	case "tcp":
 		log.Println("Booting TCP server...")
 		// Implement your TCP server logic here using the host, port, and message handler
-		servers.StartTCPServer(configData.Host, configData.Port, configData.MessageHandler)
+		servers.StartTCPServer(configData.Host, configData.Port, configData.MessageHandler, configData.MessageBufferLength)
 	case "udp":
 		log.Println("Booting UDP server...")
 		// Implement your UDP server logic here using the host, port, and message handler
-		servers.StartUDPServer(configData.Host, configData.Port, configData.MessageHandler)
+		servers.StartUDPServer(configData.Host, configData.Port, configData.MessageHandler, configData.MessageBufferLength)
 	default:
 		log.Fatal("Invalid protocol specified in the config file")
 	}
