@@ -116,7 +116,7 @@ func ValidateConfigData(configData *Config) error {
 		configData.LogFilePath = "server.log"
 	}
 
-	if configData.MessageBufferLength = 0 {
+	if configData.MessageBufferLength == 0 {
 		configData.MessageBufferLength = 1024
 	}
 
