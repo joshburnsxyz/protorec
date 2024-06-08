@@ -1,11 +1,16 @@
+GOX := $(shell which go)
+BIN := protorec
+SRC := ./cmd/protorec
+
 build:
-	go build \
+	$(GOX) build \
 		-v \
 		-x \
-		./cmd/protorec
+		-o $(BIN) \
+		$(SRC)
 
 clean:
-	rm -f protorec
+	rm -f $(BIN)
 
 test:
 	go test -v ./...
