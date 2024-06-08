@@ -1,7 +1,8 @@
 build:
 	go build \
 		-v \
-		-x
+		-x \
+		./cmd/protorec
 
 test:
 	go test -v ./...
