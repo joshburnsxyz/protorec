@@ -27,8 +27,8 @@ var configFile string
 var helpFlag bool
 
 func init() {
-	flag.StringVarP(&configFile, "config", "", "path to the JSON config file")
-	flag.BoolVarP(&helpFlag, "help", false, "print help message")
+	flag.StringVarP(&configFile, "config", "c", "", "path to the JSON config file")
+	flag.BoolVarP(&helpFlag, "help", "h", false, "print help message")
 
 	// Custom usage output
 	flag.Usage = func() {
@@ -40,17 +40,17 @@ func init() {
 func main() {
 	flag.Parse()
 
-	if *helpFlag {
+	if helpFlag {
 		flag.Usage()
 		return
 	}
 
-	if *configFile == "" {
+	if configFile == "" {
 		log.Fatal("Please provide a JSON config file using the --config flag")
 	}
 
 	// Read the config file
-	configData, err := ReadConfigFile(*configFile)
+	configData, err := ReadConfigFile(configFile)
 	if err != nil {
 		log.Fatal("Error reading config file:", err)
 	}
