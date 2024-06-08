@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/joshburnsxyz/protorec/servers"
 )
@@ -104,29 +105,50 @@ func ReadConfigFile(configFile string) (Config, error) {
 
 // ValidateConfigData validates the config data and applies defaults if necessary
 func ValidateConfigData(configData *Config) error {
+	// Store any generated errors in a slice
+	var errs []string
+
+	// Dummy object to hold default config values
+	// apply if value is missing from config
+	defaultConfig := Config{
+		Protocol:            "tcp",
+		Host:                "0.0.0.0",
+		Port:                55011,
+		LogFilePath:         "server.log",
+		MessageBufferLength: 1024,
+	}
+
 	if configData.Protocol == "" {
-		configData.Protocol = "tcp"
+		configData.Protocol = defaultConfig.Protocol
 	}
 
 	if configData.Host == "" {
-		configData.Host = "0.0.0.0"
+		configData.Host = defaultConfig.Host
 	}
 
 	if configData.Port == 0 {
-		configData.Port = 55011
-	}
-
-	if configData.MessageHandler == "" {
-		return fmt.Errorf("message_handler is required")
+		configData.Port = defaultConfig.Port
 	}
 
 	if configData.LogFilePath == "" {
-		configData.LogFilePath = "server.log"
+		configData.LogFilePath = defaultConfig.LogFilePath
 	}
 
 	if configData.MessageBufferLength == 0 {
-		configData.MessageBufferLength = 1024
+		configData.MessageBufferLength = defaultConfig.MessageBufferLength
 	}
 
-	return nil
+	// No default value for message handler, just generate an error
+	if configData.MessageHandler == "" {
+		errs = append(errs, "message_handler config is missing")
+	}
+
+	// If there is more than 0 errors in the slice return
+	// a non-nil error value.
+	if len(errs) > 0 {
+		return fmt.Errorf(strings.Join(errs, ", "))
+	} else {
+		return nil
+	}
+
 }
