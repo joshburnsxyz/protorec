@@ -4,5 +4,8 @@ build:
 		-x \
 		./cmd/protorec
 
+clean:
+	rm -f protorec
+
 test:
 	go test -v ./...
