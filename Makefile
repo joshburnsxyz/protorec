@@ -1,12 +1,14 @@
 GOX := $(shell which go)
 BIN := protorec
 SRC := ./cmd/protorec
+OUT := ./dist
 
 build:
+	mkdir -p $(OUT)
 	$(GOX) build \
 		-v \
 		-x \
-		-o $(BIN) \
+		-o $(OUT)/$(BIN) \
 		$(SRC)
 
 clean:
