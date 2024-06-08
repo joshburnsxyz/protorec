@@ -24,7 +24,7 @@ type Config struct {
 
 // global variable to store config file path
 var configFile string
-var helpFlag string
+var helpFlag bool
 
 func init() {
 	flag.StringVarP(&configFile, "config", "", "path to the JSON config file")
