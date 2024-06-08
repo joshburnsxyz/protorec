@@ -5,7 +5,7 @@ Protorec is a configurable endpoint for testing alarm devices, it currently hand
 ## Usage
 
 ```bash
-$ ./protorec -config ./config.json
+$ ./protorec --config ./config.json
 ```
 
 The config file is structured as such.
