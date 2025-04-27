@@ -41,20 +41,18 @@ func handleTCPConnection(conn net.Conn, messageHandler string, messageBufferLen 
 	message := string(buf[:n])
 
 	var handlerOutput string
-
+	var h handlers.Handler
+	
 	switch messageHandler {
 	case "SIA-CID":
 		h := handlers.SIACIDHandler{}
-		handlerOutput = h.Handle(message)
 	case "CSV-IP":
 		h := handlers.CSVIPHandler{}
-		handlerOutput = h.Handle(message)
 	case "MQTT":
 		h := handlers.MQTTHandler{}
-		handlerOutput = h.Handle(message)
 	default:
 		log.Fatal("Invalid message handler specified:", messageHandler)
 	}
-
+	handlerOutput = h.Handle(message)
 	log.Println(handlerOutput)
 }
